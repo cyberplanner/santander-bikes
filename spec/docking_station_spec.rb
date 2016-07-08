@@ -1,5 +1,4 @@
 require 'docking_station'
-require 'bike'
 
 describe DockingStation do
   it { expect(subject).to respond_to(:release_bike) }
