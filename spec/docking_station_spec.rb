@@ -38,7 +38,7 @@ describe DockingStation do
   end
 
   it "only accepts station's capacity" do
-    20.times {subject.dock(Bike.new)}
+    subject.class::DEFAULT_CAPACITY.times {subject.dock(Bike.new)}
     expect{ subject.dock(Bike.new)}.to raise_error "Full capacity reached"
   end
 
