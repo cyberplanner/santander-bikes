@@ -5,10 +5,12 @@ describe DockingStation do
 
 
   it "gets a bike" do
+    subject.dock(Bike.new)
     expect(subject.release_bike).to be_an_instance_of(Bike)
   end
 
   it "is working?" do
+    subject.dock(Bike.new)
     expect(subject.release_bike).to be_working
   end
 
@@ -22,19 +24,17 @@ describe DockingStation do
     expect(subject.dock(bike)).to eq bike
     end
 
-  it "shows docks bike" do
-    bike = Bike.new
-    subject.dock(bike)
-    expect(subject.bike).to eq bike
+    it "Show docked bike " do
+      bike = Bike.new
+      subject.dock(bike)
+      expect(subject.release_bike).to eq bike
+    end
+
+  describe '#release_bike' do
+    it "raises error" do
+      expect {subject.release_bike }.to raise_error("no bikes available")
+    end
   end
-
-  
-
-  
-
-
-
-
 
 
 
