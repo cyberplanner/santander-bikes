@@ -50,10 +50,11 @@ describe DockingStation do
     expect(subject.capacity).to eq subject.class::DEFAULT_CAPACITY
   end
 
-  it "report broken bike" do
-    bike = Bike.new
-    bike.report_broken
-    expect(bike.working?).to eq false
-    end
+#### Another test similar to "Reports broken bike" in bike_spec 
+  #it "report broken bike" do
+    #bike = Bike.new
+    #bike.report_broken
+    #expect(bike.working?).to eq false
+    #end
 
   end

@@ -12,4 +12,10 @@ class Bike
   def report_broken
     @status = false
   end
+  
+### alternative to working?  
+  #def broken?
+   # @broken
+  #end
+
 end
