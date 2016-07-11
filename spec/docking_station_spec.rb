@@ -6,9 +6,7 @@ describe DockingStation do
   it { is_expected.to respond_to(:bikes) }
 
   describe "#release_bike" do
-    let(:bike) { double :bike }
     it "gets a bike" do
-      allow(bike)
       subject.dock double(:bike)
       expect(subject.release_bike).to be_an_instance_of(Bike)
     end
@@ -16,7 +14,7 @@ describe DockingStation do
     let(:bike) { double :bike }
     it "releases working bikes?" do
       allow(bike).to receive(:working).and_return(true)
-      subject.dock double(:bike)
+      subject.dock(bike)
       released_bike = subject.release_bike
       expect(released_bike).to be_working
     end
@@ -49,10 +47,11 @@ describe DockingStation do
     expect(subject.capacity).to eq subject.class::DEFAULT_CAPACITY
   end
 
-
+  let(:bike) { double :bike }
   it "does not release a broken bike" do
-    bike = double(:bike)
-    bike.report_broken
+    bike = double(:bike, broken?: true)
+    #allow(bike).to receive(:broken?).and_return(true)
+    #bike.report_broken
     subject.dock(bike)
     expect{ subject.release_bike }.to raise_error "no bikes available"
   end
