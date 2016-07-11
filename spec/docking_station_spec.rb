@@ -32,7 +32,7 @@ describe DockingStation do
 
   describe '#release_bike' do
     it "raises error" do
-      expect { subject.release_bike }.to raise_error("no bikes available")
+      expect{ subject.release_bike }.to raise_error("no bikes available")
     end
   end
 
@@ -50,17 +50,24 @@ describe DockingStation do
     expect(subject.capacity).to eq subject.class::DEFAULT_CAPACITY
   end
 
-  it "report broken bike" do
-    bike = Bike.new
-    bike.report_broken
-    expect(bike.working?).to eq false
-    end
+#### Another test similar to "Reports broken bike" in bike_spec
+  #it "report broken bike" do
+    #bike = Bike.new
+    #bike.report_broken
+    #expect(bike.working?).to eq false
+    #end
 
-  it "Does not release 'broken bikes'" do
+  it "does not release a broken bike" do
     bike = Bike.new
     bike.report_broken
     subject.dock(bike)
-    expect(subject.release_bike).to be_working
+    expect{ subject.release_bike }.to raise_error "no bikes available"
   end
 
+  it "accepts bikes in any condetion" do
+    bike = Bike.new
+    bike.report_broken
+    subject.dock(bike)
+    expect(subject.bikes.last).to eq bike
   end
+end
